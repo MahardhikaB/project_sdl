@@ -15,7 +15,7 @@ steps:
       - 'ssh'
       - 'sdl-projecto'  # Replace with the name of your Compute Engine VM instance
       - '--zone=asia-southeast2-a'  # Replace with the zone of your Compute Engine VM instance
-      - '--command=cd /var/www/html/project_sdl && git pull origin main'
+      - '--command=cd /var/www/html/project_sdl && git pull origin master'
     dir: '/var/www/html/project_sdl'  # Specify the directory where your source code is cloned
 
   # # Step 2: Install Composer dependencies
