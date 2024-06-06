@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('sdl_users');
+            $table->foreignId('user_id')->references('id')->on('sdl_users')->onDelete('cascade');
             $table->string('image');
             $table->timestamps();
         });
