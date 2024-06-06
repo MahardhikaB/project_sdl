@@ -23,7 +23,7 @@ class SDLUserController extends Controller
         $rules=[
             'name' => 'required',
             'email' => 'required|unique:sdl_users,email',
-            'pin' => 'required|unique:sdl_users,pin|numeric|size:4',
+            'pin' => 'required|unique:sdl_users,pin|digits:4',
         ];
 
         $validator=Validator::make($request->all(),$rules);
@@ -60,7 +60,7 @@ class SDLUserController extends Controller
         $validator=Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|unique:sdl_users,email,'.$id,
-            'pin' => 'required|numeric|size:4|unique:sdl_users,pin,'.$id,
+            'pin' => 'required|digits:4|unique:sdl_users,pin,'.$id,
         ]);
 
         if($validator->fails()) {
