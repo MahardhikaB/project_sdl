@@ -41,15 +41,18 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login()
-    {
-        $credentials = request(['email', 'password']);
+{
+    $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
+    if (! $token = auth()->attempt($credentials)) {
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
+
+    return response()->json([
+        'success' => true,
+        'token' => $token,
+    ]);
+}
 
     /**
      * Get the authenticated User.
