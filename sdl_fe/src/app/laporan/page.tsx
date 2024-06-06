@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function Laporan() {
 
     async function getHistory() {
-        const res = await fetch("http://127.0.0.1:8000/api/history", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/history`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

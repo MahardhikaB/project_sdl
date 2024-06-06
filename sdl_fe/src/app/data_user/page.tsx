@@ -15,7 +15,7 @@ export default function DataUser() {
     const [openModal, setOpenModal] = useState(false);
 
     async function getAllUsers() {
-        const res = await fetch("http://127.0.0.1:8000/api/sdl_users", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/sdl_users`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function DataUser() {
 
     async function addUser() {
         setIsLoading(true);
-        const res = await fetch("http://127.0.0.1:8000/api/sdl_users", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/sdl_users`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function DataUser() {
     }
 
     async function deleteUser(id: any) {
-        const res = await fetch(`http://127.0.0.1:8000/api/sdl_users/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/sdl_users/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
