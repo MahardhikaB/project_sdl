@@ -19,7 +19,7 @@ export default function DataUser() {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getAuthTokenFromCookies()}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     const data = await res.json();
@@ -32,7 +32,7 @@ export default function DataUser() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getAuthTokenFromCookies()}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
             name: name,
@@ -53,7 +53,7 @@ export default function DataUser() {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getAuthTokenFromCookies()}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     const data = await res.json();
@@ -64,17 +64,6 @@ export default function DataUser() {
         setName("");
         setEmail("");
         setPin("");
-    }
-
-    function getAuthTokenFromCookies() {
-        const cookies = document.cookie.split(';');
-        for (const cookie of cookies) {
-            const [key, value] = cookie.trim().split('=');
-            if (key === 'token') {
-                return value;
-            }
-        }
-        return null; // Token not found in cookies
     }
 
     useEffect(() => {

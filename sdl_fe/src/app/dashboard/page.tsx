@@ -13,23 +13,12 @@ export default function Dashboard() {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getAuthTokenFromCookies()}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     const data = await res.json();
     console.log(data.length);
     setUsersCount(data.length);
-    }
-
-    function getAuthTokenFromCookies() {
-        const cookies = document.cookie.split(';');
-        for (const cookie of cookies) {
-            const [key, value] = cookie.trim().split('=');
-            if (key === 'token') {
-            return value;
-            }
-        }
-        return null; // Token not found in cookies
     }
 
     useEffect(() => {

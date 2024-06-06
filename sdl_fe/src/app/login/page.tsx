@@ -14,20 +14,11 @@ export default function Login() {
         const data = await res.json()
         console.log(data)
 
-        if (data.success) {
-            // Set cookie with secure flag (recommended) and optional expiration
-            const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // Expires in 1 day
-            document.cookie = `token=${data.token}; expires=${expires.toUTCString()}; Secure`;
-
-            window.location.href = '/dashboard';
+        if(data.success) {
+            localStorage.setItem('token', data.token)
+            window.location.href = '/dashboard'
         }
     }
-        // if(data.success) {
-        //     localStorage.setItem('token', data.token)
-        //     window.location.href = '/dashboard'
-        // }
-
-    
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
