@@ -1,8 +1,40 @@
+"use client";
 import DashTemplate from "../dash_template";
-import GambarExp from '/public/kirari.jpg'
 import Image from 'next/image'
 
+import { useEffect, useState } from "react";
+
 export default function Laporan() {
+
+    async function getHistory() {
+        const res = await fetch("http://127.0.0.1:8000/api/history", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getAuthTokenFromCookies()}`,
+        },
+    });
+    const data = await res.json();
+    setHistories(data);
+    }
+
+    function getAuthTokenFromCookies() {
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const [key, value] = cookie.trim().split('=');
+            if (key === 'token') {
+                return value;
+            }
+        }
+        return null; // Token not found in cookies
+    }
+
+    const [histories, setHistories] = useState([]);
+
+    useEffect(() => {
+        getHistory();
+    }, []);
+
     return (
         <DashTemplate activeindex={2}>
             <div className="flex flex-col text-black w-5/6 px-8 py-7 bg-white">
@@ -16,18 +48,15 @@ export default function Laporan() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="bg-[#E3F3FF]">
-                                <td className="px-4 py-2">001</td>
+                            {histories.map((history: any) => (
+                                <tr className="bg-[#E3F3FF]" key={history.id}>
+                                <td className="px-4 py-2">0{history.user_id}</td>
                                 <td className="px-4 py-2 flex justify-center items-center">
-                                    <Image src={GambarExp} alt="image" className='w-28'/>
+                                    <Image src={history.image} alt="image" width={120} height={120}/>
                                 </td>
-                                <td className="px-4 py-2">18-04-2024</td>
+                                <td className="px-4 py-2">{history.created_at}</td>
                             </tr>
-                            <tr className="bg-[#E3F3FF]">
-                                <td className="px-4 py-2">002</td>
-                                <td className="px-4 py-2">Ini Gambar</td>
-                                <td className="px-4 py-2">19-04-2024</td>
-                            </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
