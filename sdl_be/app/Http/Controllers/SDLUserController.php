@@ -23,13 +23,15 @@ class SDLUserController extends Controller
         $rules=[
             'name' => 'required',
             'email' => 'required|unique:sdl_users,email',
-            'pin' => 'required|unique:sdl_users,pin|numeric',
+            'pin' => 'required|unique:sdl_users,pin|numeric|size:4',
         ];
 
         $validator=Validator::make($request->all(),$rules);
 
         if($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),]);
         }
 
         $SDLUser=SDLUser::create([
@@ -39,6 +41,7 @@ class SDLUserController extends Controller
         ]);
 
         return response()->json([
+            'status' => true,
             'message' => 'SDLUser created successfully',
             'data' => $SDLUser,
         ]);
@@ -49,6 +52,7 @@ class SDLUserController extends Controller
 
         if(!$SDLUser) {
             return response()->json([
+                'status' => false,
                 'message' => 'SDLUser not found',
             ]);
         }
@@ -56,11 +60,14 @@ class SDLUserController extends Controller
         $validator=Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|unique:sdl_users,email,'.$id,
-            'pin' => 'required|numeric|unique:sdl_users,pin,'.$id,
+            'pin' => 'required|numeric|size:4|unique:sdl_users,pin,'.$id,
         ]);
 
         if($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),
+            ]);
         }
         
         $SDLUser->update([
@@ -70,6 +77,7 @@ class SDLUserController extends Controller
         ]);
 
         return response()->json([
+            'status' => true,
             'message' => 'SDLUser updated successfully',
             'data' => $SDLUser,
         ]);
@@ -80,6 +88,7 @@ class SDLUserController extends Controller
             
             if(!$SDLUser) {
                 return response()->json([
+                    'status' => false,
                     'message' => 'SDLUser not found',
                 ]);
             }
@@ -87,6 +96,7 @@ class SDLUserController extends Controller
             $SDLUser->delete();
     
             return response()->json([
+                'status' => true,
                 'message' => 'SDLUser deleted successfully',
             ]);
     }
