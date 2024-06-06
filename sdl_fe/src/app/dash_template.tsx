@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import LogoPutih from '/public/logo_putih.png'
 import LogoHitam from '/public/logo_hitam.png'
-import Avatar from '/public/avatar.jpg'
+import Avatar from '/public/Avatar.jpg'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
