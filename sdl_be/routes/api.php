@@ -45,9 +45,9 @@ Route::group(
         Route::put('/sdl_users/{id}', [SDLUserController::class, 'update']);
 
         Route::delete('/sdl_users/{id}', [SDLUserController::class, 'destroy']);
-
-        Route::get('/history', [HistoryController::class, 'index']);
-
-        Route::post('/history', [HistoryController::class, 'store']);
     }
 );
+
+Route::get('/history', [HistoryController::class, 'index']);
+
+Route::post('/history', [HistoryController::class, 'store']);
