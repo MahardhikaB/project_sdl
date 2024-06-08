@@ -8,6 +8,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\AuthController;
 
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -46,5 +47,7 @@ Route::group(
         Route::delete('/sdl_users/{id}', [SDLUserController::class, 'destroy']);
 
         Route::get('/history', [HistoryController::class, 'index']);
+
+        Route::post('/history', [HistoryController::class, 'store']);
     }
 );
