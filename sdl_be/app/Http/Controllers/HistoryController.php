@@ -16,6 +16,8 @@ class HistoryController extends Controller
     }
 
     public function store(Request $request) {
+        // make timezone jakarta indonesia
+        date_default_timezone_set('Asia/Jakarta');
         $rules = [
             'user_pin' => 'required|integer|digits:4',
         ];
