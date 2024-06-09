@@ -52,4 +52,4 @@ Route::get('/history', [HistoryController::class, 'index']);
 
 Route::post('/history', [HistoryController::class, 'store']);
 
-Route::put('/history/update', [HistoryController::class, 'update']);
+Route::post('/history/update', [HistoryController::class, 'update']);
