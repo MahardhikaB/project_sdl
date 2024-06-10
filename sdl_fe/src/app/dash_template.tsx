@@ -64,7 +64,7 @@ export default function DashTemplate({
             <Modal show={openModal} size="md" className="bg-black bg-opacity-75" onClose={() => setOpenModal(false)} popup>
             <Modal.Header/>
             <Modal.Body className="mx-20">
-            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-100 w-5/12 rounded-2xl bg-white flex flex-col text-black py-3'>
+            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[40%] h-100 w-5/12 rounded-2xl bg-white flex flex-col text-black py-3'>
                 <div className='flex flex-row items-center justify-between px-3 mx-3 mb-5'>
                     <h1 className='font-bold text-2xl'>Profile</h1>
                     <IoClose size={38} onClick={() => setOpenModal(false)}/>
@@ -97,7 +97,7 @@ export default function DashTemplate({
         >
             <Modal.Header />
             <Modal.Body className="mx-20">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-100 w-1/2 rounded-2xl bg-white flex flex-col text-black py-3">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-1/2 rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Edit Profile</h1>
                 <IoClose size={38} onClick={() => {setOpenModal2(false)
