@@ -37,3 +37,19 @@ body {
       background-color: transparent;
       color: transparent;
 }
+
+#loadingHistory {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#loadingHistory {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#loadingHistory {
+  z-index: 50;
+}
