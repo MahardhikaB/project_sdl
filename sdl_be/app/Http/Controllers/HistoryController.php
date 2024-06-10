@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class HistoryController extends Controller
 {
     public function index() {
-        $histories = History::query()->orderBy('created_at', 'desc')->limit(10)->get();
+        $histories = History::query()->orderBy('created_at', 'desc')->limit(4)->get();
         return response()->json($histories);
     }
 
