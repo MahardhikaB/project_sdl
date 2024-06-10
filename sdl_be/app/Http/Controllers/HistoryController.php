@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class HistoryController extends Controller
 {
-    public function index() {
-        $histories = History::query()->orderBy('created_at', 'desc')->limit(4)->get();
+    public function index(Request $request) {
+        $page = $request->input('page', 1);
+        $perPage = $request->input('per_page', 4);
+        $histories = History::query();
+        $histories = $histories->orderBy('created_at', 'desc');
+        $histories = $histories->paginate($perPage, ['*'], 'page', $page);
         return response()->json($histories);
     }
 
