@@ -18,10 +18,12 @@ export default function Laporan() {
     const data = await res.json();
     console.log(data.data);
     setHistories(data.data);
+    setLastPage(data.last_page);
     }
 
     const [histories, setHistories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [lastPage, setLastPage] = useState(1);
     const [isLoadingHistory, setIsLoadingHistory] = useState(false);
 
     async function nextPage() {
@@ -76,7 +78,7 @@ export default function Laporan() {
                 </table>
                 <div className="flex justify-end">
                     <Button className="bg-blue-200 text-black font-bold text-3xl" onClick={prevPage} disabled={currentPage === 1}>Prev</Button>
-                    <Button className="bg-blue-200 text-black font-bold text-3xl" onClick={nextPage}>Next</Button>
+                    <Button className="bg-blue-200 text-black font-bold text-3xl" onClick={nextPage} disabled={currentPage === lastPage}>Next</Button>
                 </div>
             {isLoadingHistory && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50" id="loadingHistory">
