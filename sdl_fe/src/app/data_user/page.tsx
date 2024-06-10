@@ -8,14 +8,24 @@ import { MdModeEdit } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import { BiSolidDetail } from "react-icons/bi";
 import ReactLoading from 'react-loading';
-
 import { useEffect } from "react";
+
+type User = {
+    id: number;
+    name: string;
+    email: string;
+    pin: string;
+    created_at: string;
+    updated_at: string;
+}
 
 export default function DataUser() {
     const [openModal, setOpenModal] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
     const [userId, setUserId] = useState(0);
     const [modalEdit, setModalEdit] = useState(false);
+    const [modalDetail, setModalDetail] = useState(false);
+    const [userDetail, setUserDetail] = useState<User>({id: 0, name: '', email: '', pin: '', created_at: '', updated_at: ''});
 
     async function getAllUsers() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/sdl_users`, {
@@ -148,7 +158,7 @@ export default function DataUser() {
                         <td className="px-4 py-2">{user.email}</td>
                         <td className="px-4 py-2">
                             <div className="flex flex-row justify-center">
-                                <button className="bg-yellow-200 text-white px-2 py-2 rounded-lg mr-2">
+                                <button className="bg-yellow-200 text-white px-2 py-2 rounded-lg mr-2" onClick={() => {setModalDetail(true); setUserDetail(user)}}>
                                 <BiSolidDetail size={20} />
                             </button>
                             <button className="bg-blue-500 text-white px-2 py-2 rounded-lg mr-2" onClick={() => {setModalEdit(true); setNameEdit(user.name); setEmailEdit(user.email); setPinEdit(user.pin); setUserId(user.id)}}>
@@ -174,7 +184,7 @@ export default function DataUser() {
         >
             <Modal.Header />
             <Modal.Body className="mx-20">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[20%] h-100 w-1/2 rounded-2xl bg-white flex flex-col text-black py-3">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[20%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Tambah User</h1>
                 <IoClose size={38} onClick={() => setOpenModal(false)} />
@@ -194,14 +204,12 @@ export default function DataUser() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <h1 className="pl-16 pt-1 font-bold">PIN</h1>
-                <div className="flex flex-row mr-16">
                 <input
                     type="text"
-                    className="ml-16 mr-3 mt-1 mb-2 w-full rounded-2xl bg-white p-3 font-bold"
+                    className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold"
                     value={pin}
                     onChange={(e) => setPin(e.target.value)}
                 />
-                </div>
                 {isLoading ? (
                     <div className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold flex justify-center">
                     <ReactLoading type={'balls'} color={'#ffffff'} height={'5%'} width={'5%'} />
@@ -260,7 +268,7 @@ export default function DataUser() {
         >
             <Modal.Header />
             <Modal.Body className="mx-20">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-1/2 rounded-2xl bg-white flex flex-col text-black py-3">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Edit User</h1>
                 <IoClose size={38} onClick={() => setModalEdit(false)} />
@@ -280,14 +288,12 @@ export default function DataUser() {
                     onChange={(e) => setEmailEdit(e.target.value)}
                 />
                 <h1 className="pl-16 pt-1 font-bold">PIN</h1>
-                <div className="flex flex-row mr-16">
                 <input
                     type="text"
-                    className="ml-16 mr-3 mt-1 mb-2 w-full rounded-2xl bg-white p-3 font-bold"
+                    className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold"
                     value={pinEdit}
                     onChange={(e) => setPinEdit(e.target.value)}
                 />
-                </div>
                 {isLoading ? (
                     <div className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold flex justify-center">
                     <ReactLoading type={'balls'} color={'#ffffff'} height={'5%'} width={'5%'} />
@@ -300,6 +306,38 @@ export default function DataUser() {
                         Simpan
                     </Button>
                 )}
+            </div>
+            </Modal.Body>
+        </Modal>
+        {/* Modal Detail Data */}
+        <Modal
+            show={modalDetail}
+            size="md"
+            className="bg-black bg-opacity-75"
+            onClose={() => setModalDetail(false)}
+            popup
+        >
+            <Modal.Header />
+            <Modal.Body className="mx-20">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[45%] h-100 w-[30%] rounded-2xl bg-white flex flex-col text-black py-3">
+                <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
+                <h1 className="font-bold text-2xl">Detail User</h1>
+                <IoClose size={38} onClick={() => setModalDetail(false)} />
+                </div>
+                <h1 className="pl-16 pt-1 font-bold">Nama :</h1>
+                <p className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold">
+                    • {userDetail.name ?? ''}
+                </p>
+                <h1 className="pl-16 pt-1 font-bold">Email :</h1>
+                <p className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold">
+                    • {userDetail.email ?? ''}
+                </p>
+                <h1 className="pl-16 pt-1 font-bold">PIN :</h1>
+                <div className="flex flex-row mr-16">
+                <p className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold">
+                    • {userDetail.pin ?? ''}
+                </p>
+                </div>
             </div>
             </Modal.Body>
         </Modal>
