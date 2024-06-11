@@ -81,6 +81,18 @@ export default function DashTemplate({
 
     }
 
+    async function logout() {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/auth/logout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    }
+
     useEffect(() => {
         getProfile();
     }, []);
@@ -152,7 +164,7 @@ export default function DashTemplate({
                     <Button className='ml-16 my-4 rounded-2xl bg-[#0090FA] px-8 py-2 w-[350px] text-white border-none active:border-none text-center font-bold flex justify-center items-center' onClick={() => {setOpenModal(false)
                                                             setOpenModal2(true)
                     } } >Edit Profile</Button>
-                    <Link className='ml-2 mr-16 my-4 rounded-2xl bg-red-600 py-2 w-full text-white border-none active:border-none flex justify-center items-center text-center font-bold' href={'/login'} >Logout</Link>
+                    <Button className='ml-2 mr-16 my-4 rounded-2xl bg-red-600 py-2 w-full text-white border-none active:border-none flex justify-center items-center text-center font-bold' onClick={() => logout()} >Logout</Button>
                 </div>
             </div>
             </Modal.Body>
