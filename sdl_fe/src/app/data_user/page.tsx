@@ -142,7 +142,7 @@ export default function DataUser() {
 
 
     return (
-        <DashTemplate activeindex={1}>
+        <DashTemplate activeindex={2}>
         <div className="flex flex-col text-black w-5/6 px-8 py-7">
             <h1 className="font-bold text-3xl">Data User</h1>
             <Button
