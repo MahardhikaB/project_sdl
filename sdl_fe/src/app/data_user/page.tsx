@@ -19,6 +19,11 @@ type User = {
     updated_at: string;
 }
 
+type ErrorMessage = {
+    email: string;
+    pin: string;
+}
+
 export default function DataUser() {
     const [openModal, setOpenModal] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
@@ -26,6 +31,9 @@ export default function DataUser() {
     const [modalEdit, setModalEdit] = useState(false);
     const [modalDetail, setModalDetail] = useState(false);
     const [userDetail, setUserDetail] = useState<User>({id: 0, name: '', email: '', pin: '', created_at: '', updated_at: ''});
+
+    const [ErrorMessage, setErrorMessage] = useState<ErrorMessage>({email: '', pin: ''});
+    
 
     async function getAllUsers() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/sdl_users`, {
@@ -60,11 +68,12 @@ export default function DataUser() {
         getAllUsers();
         resetForm();
         setIsLoading(false);
+        setErrorMessage({email: '', pin: ''});
     } else {
         const emailMsg = data.message.email ? data.message.email : "";
         const pinMsg = data.message.pin ? data.message.pin : "";
-        alert(emailMsg + "\n" + pinMsg);
         setIsLoading(false);
+        setErrorMessage({email: emailMsg, pin: pinMsg});
     }
     }
 
@@ -89,13 +98,13 @@ export default function DataUser() {
         getAllUsers();
         resetForm();
         setIsLoading(false);
+        setErrorMessage({email: '', pin: ''});
     } else {
         const emailMsg = data.message.email ? data.message.email : "";
         const pinMsg = data.message.pin ? data.message.pin : "";
-        alert(emailMsg + "\n" + pinMsg);
         setIsLoading(false);
+        setErrorMessage({email: emailMsg, pin: pinMsg});
     }
-    setModalEdit(false);
     getAllUsers();
     }
 
@@ -115,6 +124,7 @@ export default function DataUser() {
         setName("");
         setEmail("");
         setPin("");
+        setErrorMessage({email: '', pin: ''});
     }
 
     useEffect(() => {
@@ -187,7 +197,7 @@ export default function DataUser() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[20%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Tambah User</h1>
-                <IoClose size={38} onClick={() => setOpenModal(false)} />
+                <IoClose size={38} onClick={() => {setOpenModal(false); resetForm()}} />
                 </div>
                 <h1 className="pl-16 pt-1 font-bold">Nama</h1>
                 <input
@@ -203,6 +213,7 @@ export default function DataUser() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                {ErrorMessage.email.length > 0 && <p className="text-red-500 text-sm ml-16">*{ErrorMessage.email}</p>}
                 <h1 className="pl-16 pt-1 font-bold">PIN</h1>
                 <input
                     type="text"
@@ -210,6 +221,7 @@ export default function DataUser() {
                     value={pin}
                     onChange={(e) => setPin(e.target.value)}
                 />
+                {ErrorMessage.pin.length > 0 && <p className="text-red-500 text-sm ml-16">*{ErrorMessage.pin}</p>}
                 {isLoading ? (
                     <div className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold flex justify-center">
                     <ReactLoading type={'balls'} color={'#ffffff'} height={'5%'} width={'5%'} />
@@ -271,7 +283,7 @@ export default function DataUser() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Edit User</h1>
-                <IoClose size={38} onClick={() => setModalEdit(false)} />
+                <IoClose size={38} onClick={() => {setModalEdit(false); resetForm()}} />
                 </div>
                 <h1 className="pl-16 pt-1 font-bold">Nama</h1>
                 <input
@@ -287,6 +299,7 @@ export default function DataUser() {
                     value={emailEdit}
                     onChange={(e) => setEmailEdit(e.target.value)}
                 />
+                {ErrorMessage.email.length > 0 && <p className="text-red-500 text-sm ml-16">*{ErrorMessage.email}</p>}
                 <h1 className="pl-16 pt-1 font-bold">PIN</h1>
                 <input
                     type="text"
@@ -294,6 +307,7 @@ export default function DataUser() {
                     value={pinEdit}
                     onChange={(e) => setPinEdit(e.target.value)}
                 />
+                {ErrorMessage.pin.length > 0 && <p className="text-red-500 text-sm ml-16">*{ErrorMessage.pin}</p>}
                 {isLoading ? (
                     <div className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold flex justify-center">
                     <ReactLoading type={'balls'} color={'#ffffff'} height={'5%'} width={'5%'} />
