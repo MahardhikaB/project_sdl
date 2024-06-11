@@ -84,12 +84,6 @@ class HistoryController extends Controller
         $path = 'images/' . $imageName;
         Storage::disk('public')->put($path, $imageData);
 
-        // $image = $request->file('image');
-
-        // if ($image) {
-        //     $image_name= $image->store('images','public');
-        // }
-
         $history->update([
             'image' => $path,
         ]);
@@ -98,5 +92,44 @@ class HistoryController extends Controller
             'message' => 'History updated successfully',
             'data' => $history,
         ], 200);
+    }
+
+    public function todayHistoryCount() {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('Y-m-d');
+        $histories = History::whereDate('created_at', $today)->count();
+        return response()->json([
+            'message' => 'History updated successfully',
+            'data' => $histories,
+        ], 200);;
+    }
+
+    public function graphData() {
+        date_default_timezone_set('Asia/Jakarta');
+        
+        // Generate the last 7 days' dates
+        $dates = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $dates[date('Y-m-d', strtotime("-$i days"))] = 0;
+        }
+        
+        // Fetch the history data for the last 7 days
+        $histories = History::selectRaw('DATE(created_at) as date, count(*) as count')
+            ->whereBetween('created_at', [date('Y-m-d', strtotime('-7 days')), date('Y-m-d', strtotime('+1 days'))])
+            ->groupBy('date')
+            ->get();
+        
+        // Update the counts in the dates array
+        foreach ($histories as $history) {
+            $dates[$history->date] = $history->count;
+        }
+        
+        // Prepare the final response array
+        $result = [];
+        foreach ($dates as $date => $count) {
+            $result[] = ['date' => $date, 'count' => $count];
+        }
+        
+        return response()->json($result);
     }
 }
