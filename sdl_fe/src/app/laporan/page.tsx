@@ -53,7 +53,7 @@ export default function Laporan() {
     }, []);
 
     return (
-        <DashTemplate activeindex={2}>
+        <DashTemplate activeindex={3}>
             <div className="flex flex-col text-black w-5/6 px-8 py-7 bg-white">
                 <h1 className="font-bold text-3xl pb-6">History</h1>
                 <table className="border-collapse border border-gray-300 rounded-lg overflow-hidden w-full text-center">
