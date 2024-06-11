@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,22 @@ Route::group(
         Route::put('/sdl_users/{id}', [SDLUserController::class, 'update']);
 
         Route::delete('/sdl_users/{id}', [SDLUserController::class, 'destroy']);
+
+        Route::get('/admin', [AdminController::class, 'index']);
+        
+        Route::get('/admin/{id}', [AdminController::class, 'show']);
+
+        Route::get('/admin/profile/get', [AdminController::class, 'profile']);
+
+        Route::post('/admin', [AdminController::class, 'store']);
+
+        Route::put('/admin/{id}', [AdminController::class, 'update']);
+
+        Route::delete('/admin/{id}', [AdminController::class, 'destroy']);
+
+        Route::get('/history_today', [HistoryController::class, 'todayHistoryCount']);
+
+        Route::get('/graph', [HistoryController::class, 'graphData']);
     }
 );
 
