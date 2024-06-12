@@ -149,15 +149,15 @@ type ErrorMessage = {
             onClick={() => setOpenModal(true)}
             className="m-3 rounded-full bg-black text-white font-semibold p-1 self-end"
             >
-            Tambah Admin +
+            Add Admin +
             </Button>
             <table className="border-collapse border border-gray-300 rounded-lg overflow-hidden w-full text-center">
             <thead className="bg-blue-200">
                 <tr>
                 <th className="px-4 py-2">ID</th>
-                <th className="px-4 py-2">Nama</th>
+                <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Email</th>
-                <th className="px-4 py-2">Aksi</th>
+                <th className="px-4 py-2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -196,10 +196,10 @@ type ErrorMessage = {
             <Modal.Body className="mx-20">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[20%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
-                <h1 className="font-bold text-2xl">Tambah Admin</h1>
+                <h1 className="font-bold text-2xl">Add Admin</h1>
                 <IoClose size={38} onClick={() => {setOpenModal(false); resetForm()}} />
                 </div>
-                <h1 className="pl-16 pt-1 font-bold">Nama</h1>
+                <h1 className="pl-16 pt-1 font-bold">Name</h1>
                 <input
                     type="text"
                     className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold"
@@ -230,8 +230,8 @@ type ErrorMessage = {
                     <Button
                         className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold"
                         onClick={() => addAdmin()}
-                >
-                        Simpan
+                    >
+                        Save
                     </Button>
                 )}
             </div>
@@ -252,7 +252,7 @@ type ErrorMessage = {
                     <h1 className="font-bold text-2xl">Delete Admin</h1>
                     <IoClose size={38} onClick={() => setModalDelete(false)} />
                 </div>
-                <h1 className="text-center pt-1 font-bold">Apakah anda yakin ingin menghapus Admin ini?</h1>
+                <h1 className="text-center pt-1 font-bold">Are you sure you want to delete this Admin?</h1>
                 <div className="flex flex-row justify-center gap-4 px-4">
                     <Button
                         className="my-4 rounded-2xl bg-[#0090FA] p-3 w-full text-white border-none active:border-none text-center font-bold"
@@ -285,7 +285,7 @@ type ErrorMessage = {
                 <h1 className="font-bold text-2xl">Edit Admin</h1>
                 <IoClose size={38} onClick={() => {setModalEdit(false); resetForm()}} />
                 </div>
-                <h1 className="pl-16 pt-1 font-bold">Nama</h1>
+                <h1 className="pl-16 pt-1 font-bold">Name</h1>
                 <input
                     type="text"
                     className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold"
@@ -317,7 +317,7 @@ type ErrorMessage = {
                         className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold"
                         onClick={() => editAdmin()}
                 >
-                        Simpan
+                        Save
                     </Button>
                 )}
             </div>
@@ -338,7 +338,7 @@ type ErrorMessage = {
                 <h1 className="font-bold text-2xl">Detail Admin</h1>
                 <IoClose size={38} onClick={() => setModalDetail(false)} />
                 </div>
-                <h1 className="pl-16 pt-1 font-bold">Nama :</h1>
+                <h1 className="pl-16 pt-1 font-bold">Name :</h1>
                 <p className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold">
                     • {adminDetail.name ?? ''}
                 </p>
