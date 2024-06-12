@@ -60,8 +60,8 @@ export default function Laporan() {
                     <thead className="bg-blue-200">
                         <tr>
                             <th className="px-4 py-2">User</th>
-                            <th className="px-4 py-2">Gambar</th>
-                            <th className="px-4 py-2">Tanggal</th>
+                            <th className="px-4 py-2">Image</th>
+                            <th className="px-4 py-2">Date & Time</th>
                         </tr>
                     </thead>
                     <tbody>
