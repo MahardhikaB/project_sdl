@@ -12,7 +12,7 @@ class HistoryController extends Controller
 {
     public function index(Request $request) {
         $page = $request->input('page', 1);
-        $perPage = $request->input('per_page', 4);
+        $perPage = $request->input('per_page', 5);
         $histories = History::query();
         $histories = $histories->orderBy('created_at', 'desc');
         $histories = $histories->paginate($perPage, ['*'], 'page', $page);
