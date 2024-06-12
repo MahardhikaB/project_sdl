@@ -181,12 +181,12 @@ export default function DashTemplate({
         >
             <Modal.Header />
             <Modal.Body className="mx-20">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-1/2 rounded-2xl bg-white flex flex-col text-black py-3">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[25%] h-100 w-[40%] rounded-2xl bg-white flex flex-col text-black py-3">
                 <div className="flex flex-row items-center justify-between px-3 mx-3 mb-5">
                 <h1 className="font-bold text-2xl">Edit Profile</h1>
                 <IoClose size={38} onClick={() => {setOpenModal2(false); setOpenModal(true); setErrorMessage({email : '', password : ''})}} />
                 </div>
-                <h1 className="pl-16 pt-1 font-bold">Nama</h1>
+                <h1 className="pl-16 pt-1 font-bold">Name</h1>
                 <input
                 type="text"
                 className="mx-16 mt-1 mb-2 rounded-2xl bg-white p-3 font-bold"
@@ -213,7 +213,7 @@ export default function DashTemplate({
                 className="mx-16 my-4 rounded-2xl bg-[#0090FA] p-3 text-white border-none active:border-none text-center font-bold"
                 onClick={() => {updateProfile()}}
                 >
-                Simpan
+                Save
                 </Button>
             </div>
             </Modal.Body>
