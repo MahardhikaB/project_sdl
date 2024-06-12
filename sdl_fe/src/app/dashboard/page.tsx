@@ -36,15 +36,9 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Line Chart',
+            text: 'Opened Door History',
         },
     },
-    scales: {
-        x: {
-            min: 0,
-            max: 12
-        }
-    }
 };
 
 type graphData = {
@@ -109,7 +103,7 @@ export default function Dashboard() {
         labels,
         datasets: [
             {
-                label: 'Dataset 1',
+                label: 'Total Door Opened',
                 data: graphData.map((item) => item.count),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -128,7 +122,7 @@ export default function Dashboard() {
                     </div>
                     <div className="bg-[#E3F3FF] rounded-lg w-full flex flex-row justify-between">
                         <h1 className="font-bold text-3xl mx-4 my-4">
-                            Doors Opened Today
+                            Door Opened Today
                         </h1>
                         <h1 className="font-bold text-3xl m-4">{todayHistoryCount} Times</h1>
                     </div>
